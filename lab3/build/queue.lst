@@ -1,0 +1,403 @@
+ARM GAS  /tmp/ccstmOEu.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"queue.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.init_queue,"ax",%progbits
+  20              		.align	1
+  21              		.global	init_queue
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	init_queue:
+  27              	.LVL0:
+  28              	.LFB132:
+  29              		.file 1 "Core/Src/queue.c"
+   1:Core/Src/queue.c **** /* queue.c --- 
+   2:Core/Src/queue.c ****  * 
+   3:Core/Src/queue.c ****  * Filename: queue.c
+   4:Core/Src/queue.c ****  * Description: 
+   5:Core/Src/queue.c ****  * Author: Bryce Himebaugh
+   6:Core/Src/queue.c ****  * Maintainer: 
+   7:Core/Src/queue.c ****  * Created: Thu Feb  7 19:49:26 2013 (-0500)
+   8:Core/Src/queue.c ****  * Version: 
+   9:Core/Src/queue.c ****  * Last-Updated: 
+  10:Core/Src/queue.c ****  *           By: 
+  11:Core/Src/queue.c ****  *     Update #: 0
+  12:Core/Src/queue.c ****  * URL: 
+  13:Core/Src/queue.c ****  * Doc URL: 
+  14:Core/Src/queue.c ****  * Keywords: 
+  15:Core/Src/queue.c ****  * Compatibility: 
+  16:Core/Src/queue.c ****  * 
+  17:Core/Src/queue.c ****  */
+  18:Core/Src/queue.c **** 
+  19:Core/Src/queue.c **** /* Commentary: 
+  20:Core/Src/queue.c ****  * 
+  21:Core/Src/queue.c ****  * 
+  22:Core/Src/queue.c ****  * 
+  23:Core/Src/queue.c ****  */
+  24:Core/Src/queue.c **** 
+  25:Core/Src/queue.c **** /* Change Log:
+  26:Core/Src/queue.c ****  * 
+  27:Core/Src/queue.c ****  * 
+  28:Core/Src/queue.c ****  */
+  29:Core/Src/queue.c **** 
+ARM GAS  /tmp/ccstmOEu.s 			page 2
+
+
+  30:Core/Src/queue.c **** /* This program is free software; you can redistribute it and/or
+  31:Core/Src/queue.c ****  * modify it under the terms of the GNU General Public License as
+  32:Core/Src/queue.c ****  * published by the Free Software Foundation; either version 3, or
+  33:Core/Src/queue.c ****  * (at your option) any later version.
+  34:Core/Src/queue.c ****  * 
+  35:Core/Src/queue.c ****  * This program is distributed in the hope that it will be useful,
+  36:Core/Src/queue.c ****  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  37:Core/Src/queue.c ****  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  38:Core/Src/queue.c ****  * General Public License for more details.
+  39:Core/Src/queue.c ****  * 
+  40:Core/Src/queue.c ****  * You should have received a copy of the GNU General Public License
+  41:Core/Src/queue.c ****  * along with this program; see the file COPYING.  If not, write to
+  42:Core/Src/queue.c ****  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth
+  43:Core/Src/queue.c ****  * Floor, Boston, MA 02110-1301, USA.
+  44:Core/Src/queue.c ****  */
+  45:Core/Src/queue.c **** 
+  46:Core/Src/queue.c **** /* Code: */
+  47:Core/Src/queue.c **** 
+  48:Core/Src/queue.c **** #include "queue.h"
+  49:Core/Src/queue.c **** #include "interrupt.h"
+  50:Core/Src/queue.c **** 
+  51:Core/Src/queue.c **** void init_queue(queue_t *buf) {
+  30              		.loc 1 51 31 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 51 31 is_stmt 0 view .LVU1
+  35 0000 10B5     		push	{r4, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0446     		mov	r4, r0
+  52:Core/Src/queue.c ****   uint32_t mask;
+  41              		.loc 1 52 3 is_stmt 1 view .LVU2
+  53:Core/Src/queue.c ****   mask = disable();
+  42              		.loc 1 53 3 view .LVU3
+  43              		.loc 1 53 10 is_stmt 0 view .LVU4
+  44 0004 FFF7FEFF 		bl	disable
+  45              	.LVL1:
+  54:Core/Src/queue.c ****   buf->head=0;
+  46              		.loc 1 54 3 is_stmt 1 view .LVU5
+  47              		.loc 1 54 12 is_stmt 0 view .LVU6
+  48 0008 0023     		movs	r3, #0
+  49 000a 2360     		str	r3, [r4]
+  55:Core/Src/queue.c ****   buf->tail=0;
+  50              		.loc 1 55 3 is_stmt 1 view .LVU7
+  51              		.loc 1 55 12 is_stmt 0 view .LVU8
+  52 000c 6360     		str	r3, [r4, #4]
+  56:Core/Src/queue.c ****   restore(mask);
+  53              		.loc 1 56 3 is_stmt 1 view .LVU9
+  54 000e FFF7FEFF 		bl	restore
+  55              	.LVL2:
+  57:Core/Src/queue.c **** }
+  56              		.loc 1 57 1 is_stmt 0 view .LVU10
+  57 0012 10BD     		pop	{r4, pc}
+  58              		.loc 1 57 1 view .LVU11
+ARM GAS  /tmp/ccstmOEu.s 			page 3
+
+
+  59              		.cfi_endproc
+  60              	.LFE132:
+  62              		.section	.text.enqueue,"ax",%progbits
+  63              		.align	1
+  64              		.global	enqueue
+  65              		.syntax unified
+  66              		.thumb
+  67              		.thumb_func
+  69              	enqueue:
+  70              	.LVL3:
+  71              	.LFB133:
+  58:Core/Src/queue.c **** 
+  59:Core/Src/queue.c **** int enqueue (queue_t *buf, uint8_t data) {
+  72              		.loc 1 59 42 is_stmt 1 view -0
+  73              		.cfi_startproc
+  74              		@ args = 0, pretend = 0, frame = 0
+  75              		@ frame_needed = 0, uses_anonymous_args = 0
+  76              		.loc 1 59 42 is_stmt 0 view .LVU13
+  77 0000 38B5     		push	{r3, r4, r5, lr}
+  78              	.LCFI1:
+  79              		.cfi_def_cfa_offset 16
+  80              		.cfi_offset 3, -16
+  81              		.cfi_offset 4, -12
+  82              		.cfi_offset 5, -8
+  83              		.cfi_offset 14, -4
+  84 0002 0446     		mov	r4, r0
+  85 0004 0D46     		mov	r5, r1
+  60:Core/Src/queue.c ****   int return_val=0;
+  86              		.loc 1 60 3 is_stmt 1 view .LVU14
+  87              	.LVL4:
+  61:Core/Src/queue.c ****   uint32_t mask;
+  88              		.loc 1 61 3 view .LVU15
+  62:Core/Src/queue.c ****   mask = disable();
+  89              		.loc 1 62 3 view .LVU16
+  90              		.loc 1 62 10 is_stmt 0 view .LVU17
+  91 0006 FFF7FEFF 		bl	disable
+  92              	.LVL5:
+  63:Core/Src/queue.c ****   if ((((buf->head)+1)%QUEUE_SIZE)!=buf->tail) {
+  93              		.loc 1 63 3 is_stmt 1 view .LVU18
+  94              		.loc 1 63 13 is_stmt 0 view .LVU19
+  95 000a 2268     		ldr	r2, [r4]
+  96              		.loc 1 63 20 view .LVU20
+  97 000c 531C     		adds	r3, r2, #1
+  98              		.loc 1 63 23 view .LVU21
+  99 000e 5942     		rsbs	r1, r3, #0
+ 100 0010 03F01F03 		and	r3, r3, #31
+ 101 0014 01F01F01 		and	r1, r1, #31
+ 102 0018 58BF     		it	pl
+ 103 001a 4B42     		rsbpl	r3, r1, #0
+ 104              		.loc 1 63 40 view .LVU22
+ 105 001c 6168     		ldr	r1, [r4, #4]
+ 106              		.loc 1 63 6 view .LVU23
+ 107 001e 8B42     		cmp	r3, r1
+ 108 0020 07D0     		beq	.L5
+  64:Core/Src/queue.c ****     buf->buffer[buf->head]=data;   
+ 109              		.loc 1 64 5 is_stmt 1 view .LVU24
+ 110              		.loc 1 64 27 is_stmt 0 view .LVU25
+ARM GAS  /tmp/ccstmOEu.s 			page 4
+
+
+ 111 0022 2244     		add	r2, r2, r4
+ 112 0024 1572     		strb	r5, [r2, #8]
+  65:Core/Src/queue.c ****     buf->head=((buf->head)+1)%QUEUE_SIZE;
+ 113              		.loc 1 65 5 is_stmt 1 view .LVU26
+ 114              		.loc 1 65 14 is_stmt 0 view .LVU27
+ 115 0026 2360     		str	r3, [r4]
+  66:Core/Src/queue.c ****     return_val=0;
+ 116              		.loc 1 66 5 is_stmt 1 view .LVU28
+ 117              		.loc 1 66 15 is_stmt 0 view .LVU29
+ 118 0028 0024     		movs	r4, #0
+ 119              	.LVL6:
+ 120              	.L4:
+  67:Core/Src/queue.c ****   }
+  68:Core/Src/queue.c ****   else {
+  69:Core/Src/queue.c ****     return_val=-1;
+  70:Core/Src/queue.c ****   }
+  71:Core/Src/queue.c ****   restore(mask);
+ 121              		.loc 1 71 3 is_stmt 1 view .LVU30
+ 122 002a FFF7FEFF 		bl	restore
+ 123              	.LVL7:
+  72:Core/Src/queue.c ****   return (return_val);
+ 124              		.loc 1 72 3 view .LVU31
+  73:Core/Src/queue.c **** }
+ 125              		.loc 1 73 1 is_stmt 0 view .LVU32
+ 126 002e 2046     		mov	r0, r4
+ 127 0030 38BD     		pop	{r3, r4, r5, pc}
+ 128              	.LVL8:
+ 129              	.L5:
+  69:Core/Src/queue.c ****   }
+ 130              		.loc 1 69 15 view .LVU33
+ 131 0032 4FF0FF34 		mov	r4, #-1
+ 132              	.LVL9:
+  69:Core/Src/queue.c ****   }
+ 133              		.loc 1 69 15 view .LVU34
+ 134 0036 F8E7     		b	.L4
+ 135              		.cfi_endproc
+ 136              	.LFE133:
+ 138              		.section	.text.dequeue,"ax",%progbits
+ 139              		.align	1
+ 140              		.global	dequeue
+ 141              		.syntax unified
+ 142              		.thumb
+ 143              		.thumb_func
+ 145              	dequeue:
+ 146              	.LVL10:
+ 147              	.LFB134:
+  74:Core/Src/queue.c **** 
+  75:Core/Src/queue.c **** uint8_t dequeue (queue_t *buf) {
+ 148              		.loc 1 75 32 is_stmt 1 view -0
+ 149              		.cfi_startproc
+ 150              		@ args = 0, pretend = 0, frame = 0
+ 151              		@ frame_needed = 0, uses_anonymous_args = 0
+ 152              		.loc 1 75 32 is_stmt 0 view .LVU36
+ 153 0000 38B5     		push	{r3, r4, r5, lr}
+ 154              	.LCFI2:
+ 155              		.cfi_def_cfa_offset 16
+ 156              		.cfi_offset 3, -16
+ARM GAS  /tmp/ccstmOEu.s 			page 5
+
+
+ 157              		.cfi_offset 4, -12
+ 158              		.cfi_offset 5, -8
+ 159              		.cfi_offset 14, -4
+ 160 0002 0446     		mov	r4, r0
+  76:Core/Src/queue.c ****   int return_val=0;
+ 161              		.loc 1 76 3 is_stmt 1 view .LVU37
+ 162              	.LVL11:
+  77:Core/Src/queue.c ****   uint32_t mask;
+ 163              		.loc 1 77 3 view .LVU38
+  78:Core/Src/queue.c ****   mask = disable();
+ 164              		.loc 1 78 3 view .LVU39
+ 165              		.loc 1 78 10 is_stmt 0 view .LVU40
+ 166 0004 FFF7FEFF 		bl	disable
+ 167              	.LVL12:
+  79:Core/Src/queue.c ****   if (buf->tail!=buf->head) {
+ 168              		.loc 1 79 3 is_stmt 1 view .LVU41
+ 169              		.loc 1 79 10 is_stmt 0 view .LVU42
+ 170 0008 6368     		ldr	r3, [r4, #4]
+ 171              		.loc 1 79 21 view .LVU43
+ 172 000a 2268     		ldr	r2, [r4]
+ 173              		.loc 1 79 6 view .LVU44
+ 174 000c 9342     		cmp	r3, r2
+ 175 000e 0ED0     		beq	.L9
+  80:Core/Src/queue.c ****     return_val=buf->buffer[buf->tail];
+ 176              		.loc 1 80 5 is_stmt 1 view .LVU45
+ 177              		.loc 1 80 27 is_stmt 0 view .LVU46
+ 178 0010 E218     		adds	r2, r4, r3
+ 179 0012 157A     		ldrb	r5, [r2, #8]	@ zero_extendqisi2
+ 180              	.LVL13:
+  81:Core/Src/queue.c ****     buf->tail=((buf->tail)+1)%QUEUE_SIZE;
+ 181              		.loc 1 81 5 is_stmt 1 view .LVU47
+ 182              		.loc 1 81 27 is_stmt 0 view .LVU48
+ 183 0014 0133     		adds	r3, r3, #1
+ 184              		.loc 1 81 30 view .LVU49
+ 185 0016 5A42     		rsbs	r2, r3, #0
+ 186 0018 03F01F03 		and	r3, r3, #31
+ 187 001c 02F01F02 		and	r2, r2, #31
+ 188 0020 58BF     		it	pl
+ 189 0022 5342     		rsbpl	r3, r2, #0
+ 190              		.loc 1 81 14 view .LVU50
+ 191 0024 6360     		str	r3, [r4, #4]
+ 192              	.LVL14:
+ 193              	.L8:
+  82:Core/Src/queue.c ****   }
+  83:Core/Src/queue.c ****   restore(mask);
+ 194              		.loc 1 83 3 is_stmt 1 view .LVU51
+ 195 0026 FFF7FEFF 		bl	restore
+ 196              	.LVL15:
+  84:Core/Src/queue.c ****   return(return_val);
+ 197              		.loc 1 84 3 view .LVU52
+  85:Core/Src/queue.c **** }
+ 198              		.loc 1 85 1 is_stmt 0 view .LVU53
+ 199 002a 2846     		mov	r0, r5
+ 200 002c 38BD     		pop	{r3, r4, r5, pc}
+ 201              	.LVL16:
+ 202              	.L9:
+  76:Core/Src/queue.c ****   uint32_t mask;
+ARM GAS  /tmp/ccstmOEu.s 			page 6
+
+
+ 203              		.loc 1 76 7 view .LVU54
+ 204 002e 0025     		movs	r5, #0
+ 205 0030 F9E7     		b	.L8
+ 206              		.cfi_endproc
+ 207              	.LFE134:
+ 209              		.section	.text.queue_empty,"ax",%progbits
+ 210              		.align	1
+ 211              		.global	queue_empty
+ 212              		.syntax unified
+ 213              		.thumb
+ 214              		.thumb_func
+ 216              	queue_empty:
+ 217              	.LVL17:
+ 218              	.LFB135:
+  86:Core/Src/queue.c **** 
+  87:Core/Src/queue.c **** int queue_empty(queue_t *buf) {
+ 219              		.loc 1 87 31 is_stmt 1 view -0
+ 220              		.cfi_startproc
+ 221              		@ args = 0, pretend = 0, frame = 0
+ 222              		@ frame_needed = 0, uses_anonymous_args = 0
+ 223              		.loc 1 87 31 is_stmt 0 view .LVU56
+ 224 0000 10B5     		push	{r4, lr}
+ 225              	.LCFI3:
+ 226              		.cfi_def_cfa_offset 8
+ 227              		.cfi_offset 4, -8
+ 228              		.cfi_offset 14, -4
+ 229 0002 0446     		mov	r4, r0
+  88:Core/Src/queue.c ****   int retval = 0;
+ 230              		.loc 1 88 3 is_stmt 1 view .LVU57
+ 231              	.LVL18:
+  89:Core/Src/queue.c ****   uint32_t mask;
+ 232              		.loc 1 89 3 view .LVU58
+  90:Core/Src/queue.c ****   mask = disable();
+ 233              		.loc 1 90 3 view .LVU59
+ 234              		.loc 1 90 10 is_stmt 0 view .LVU60
+ 235 0004 FFF7FEFF 		bl	disable
+ 236              	.LVL19:
+  91:Core/Src/queue.c ****   if (buf->head==buf->tail) {
+ 237              		.loc 1 91 3 is_stmt 1 view .LVU61
+ 238              		.loc 1 91 10 is_stmt 0 view .LVU62
+ 239 0008 2268     		ldr	r2, [r4]
+ 240              		.loc 1 91 21 view .LVU63
+ 241 000a 6368     		ldr	r3, [r4, #4]
+ 242              		.loc 1 91 6 view .LVU64
+ 243 000c 9A42     		cmp	r2, r3
+ 244 000e 04D0     		beq	.L13
+  88:Core/Src/queue.c ****   uint32_t mask;
+ 245              		.loc 1 88 7 view .LVU65
+ 246 0010 0024     		movs	r4, #0
+ 247              	.LVL20:
+ 248              	.L12:
+  92:Core/Src/queue.c ****     retval=1;
+  93:Core/Src/queue.c ****   }
+  94:Core/Src/queue.c ****   restore(mask);
+ 249              		.loc 1 94 3 is_stmt 1 view .LVU66
+ 250 0012 FFF7FEFF 		bl	restore
+ 251              	.LVL21:
+ARM GAS  /tmp/ccstmOEu.s 			page 7
+
+
+  95:Core/Src/queue.c ****   return (retval);
+ 252              		.loc 1 95 3 view .LVU67
+  96:Core/Src/queue.c **** }
+ 253              		.loc 1 96 1 is_stmt 0 view .LVU68
+ 254 0016 2046     		mov	r0, r4
+ 255 0018 10BD     		pop	{r4, pc}
+ 256              	.LVL22:
+ 257              	.L13:
+  92:Core/Src/queue.c ****     retval=1;
+ 258              		.loc 1 92 11 view .LVU69
+ 259 001a 0124     		movs	r4, #1
+ 260              	.LVL23:
+  92:Core/Src/queue.c ****     retval=1;
+ 261              		.loc 1 92 11 view .LVU70
+ 262 001c F9E7     		b	.L12
+ 263              		.cfi_endproc
+ 264              	.LFE135:
+ 266              		.text
+ 267              	.Letext0:
+ 268              		.file 2 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_types.h"
+ 269              		.file 3 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 270              		.file 4 "Core/Inc/queue.h"
+ 271              		.file 5 "Core/Inc/interrupt.h"
+ARM GAS  /tmp/ccstmOEu.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 queue.c
+     /tmp/ccstmOEu.s:20     .text.init_queue:0000000000000000 $t
+     /tmp/ccstmOEu.s:26     .text.init_queue:0000000000000000 init_queue
+     /tmp/ccstmOEu.s:63     .text.enqueue:0000000000000000 $t
+     /tmp/ccstmOEu.s:69     .text.enqueue:0000000000000000 enqueue
+     /tmp/ccstmOEu.s:139    .text.dequeue:0000000000000000 $t
+     /tmp/ccstmOEu.s:145    .text.dequeue:0000000000000000 dequeue
+     /tmp/ccstmOEu.s:210    .text.queue_empty:0000000000000000 $t
+     /tmp/ccstmOEu.s:216    .text.queue_empty:0000000000000000 queue_empty
+
+UNDEFINED SYMBOLS
+disable
+restore

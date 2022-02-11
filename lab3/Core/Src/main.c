@@ -21,16 +21,24 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdlib.h>
+#include <stdio.h>
+#include "stm32l4xx_ll_usart.h"
+#include <string.h>
+#include <retarget.h>
+#include <command.h>
+#include "queue.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -42,19 +50,34 @@
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+queue_t rx_queue;
+int led_on = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
-/* USER CODE BEGIN PFP */
 
+/* USER CODE BEGIN PFP */
+void help_command(char *args);
+void lof_command();
+void lon_command();
+void test_command(char *args);
+int parse_command (uint8_t *line, uint8_t **command, uint8_t **args);
+int execute_command(uint8_t * line);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+command_t commands[] = {
+  {"help",help_command},
+  {"lof",lof_command},
+  {"lon",lon_command},
+  {"test",test_command},
+  {0,0}
+};
+
 
 /* USER CODE END 0 */
 
@@ -74,7 +97,9 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  uint8_t command_line[QUEUE_SIZE];
+  uint8_t ch;
+  int n = 0;
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -87,18 +112,43 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+ 
   /* USER CODE BEGIN 2 */
-
+  RetargetInit(&huart2);
+  LL_USART_EnableIT_RXNE(USART2); 
+  printf("\r\nSystem Running\n\r");
+  printf("\r\nSTM$");
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+    if ((ch = dequeue(&rx_queue))) {
+      putchar(ch);
+      command_line[n] = ch;
+      if(ch == '\r' || ch == '\n'){
+	command_line[n] = '\0'; //end of string
+      	if(!execute_command(command_line)){
+	  printf("\r\nOK");
+	}else{
+	  printf("\r\nNOK");
+	}
+	n = 0;
+	printf("\r\nSTM$");
+      }else{
+	n++;
+      }
+      
+    }
+  }
+   
+    
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+  
   /* USER CODE END 3 */
 }
 
@@ -182,7 +232,6 @@ static void MX_USART2_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
-
   /* USER CODE END USART2_Init 2 */
 
 }
@@ -214,6 +263,95 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+int execute_command(uint8_t * line) {
+  uint8_t *cmd;
+  uint8_t *arg;
+  command_t *p = commands;
+  int success = 0;
+
+  if (!line) {
+    return (-1); // Passed a bad pointer 
+  }
+  if (parse_command(line,&cmd,&arg) == -1) {
+    printf("Error with parse command\n\r");
+    return (-1);
+  }
+  while (p->cmd_string) {
+    if (!strcmp(p->cmd_string,(char *) cmd)) {
+      if (!p->cmd_function) {
+        return (-1);
+      }
+      (*p->cmd_function)((char *)arg);            // Run the command with the passed arguments
+      success = 1;
+      break;
+    }
+    p++;
+  }
+  if (success) {
+    return (0);
+  }
+  else {
+    return (-1);
+  }
+  }
+int parse_command (uint8_t *line, uint8_t **command, uint8_t **args){
+
+  uint8_t *line_temp;
+  if((!line) || (!command) || (!args)){ //check for bad pointer
+    return(-1); 
+  }
+  line_temp= line;
+  *command = line;
+  //strcpy(line_left, line);
+  while(*line_temp != ','){ //increment through input to find end of command
+    if(!*line_temp){
+      *args = '\0'; //no arguments
+      return(0);
+    }
+    line_temp++;
+  }
+
+  *line_temp = '\0'; //replace comma with null for end of command string
+  *args = line_temp +1; //one char past null is beginning of arguments
+  return 0;
+}
+void help_command(char *args){
+  printf("\r\nAvailable Commands:\n\r");
+  printf("lon\n\r");
+  printf("lof\n\r");
+  printf("test\n\r");
+}
+void lon_command(){
+  if(led_on == 0){
+    HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+    led_on = 1;
+    printf("\r\nLED ON\n\r");
+  }else{
+    printf("\r\nLED ALREADY ON\n\r");
+  }
+		
+}
+void lof_command(){
+  if(led_on == 1){
+    HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+    led_on = 0;
+    printf("\r\nLED OFF\n\r");
+  }else{
+    printf("\r\nLED ALREADY OFF\n\r");
+  }
+  
+}
+void test_command(char *args){
+  printf("\r\ntest\n\r");
+  while(*args!='\0'){
+    if(*args!=','){
+      putchar(*args);
+    }else{
+      printf("\r\n");
+    }
+    args++;
+  }
+}
 
 /* USER CODE END 4 */
 

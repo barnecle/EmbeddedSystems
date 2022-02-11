@@ -22,6 +22,8 @@
 #include "stm32l4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "queue.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,7 +43,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+extern queue_t rx_queue;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -204,11 +206,25 @@ void SysTick_Handler(void)
 void USART2_IRQHandler(void)
 {
   /* USER CODE BEGIN USART2_IRQn 0 */
-
+  
   /* USER CODE END USART2_IRQn 0 */
   HAL_UART_IRQHandler(&huart2);
   /* USER CODE BEGIN USART2_IRQn 1 */
-
+  
+  uint8_t ch;
+  ch = getchar();
+  if (enqueue(&rx_queue,ch)) {
+    dequeue(&rx_queue);
+    enqueue(&rx_queue,ch);
+  }
+  /*c = getchar();
+  buf.buffer[buf.head] = c;
+  if(buf.head == (MAX_BUF-1)){
+    buf.head = 0;
+  }else{
+    buf.head++;
+    }*/
+  HAL_UART_IRQHandler(&huart2);
   /* USER CODE END USART2_IRQn 1 */
 }
 

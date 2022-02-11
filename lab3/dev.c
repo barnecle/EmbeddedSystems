@@ -5,7 +5,7 @@
 void help_command(char *args);
 void lof_command();
 void lon_command();
-void test_command(char *args);
+void test_command(char **args);
 int parse_command (char *line, char **command, char **args);
 int execute_command(u_int8_t * line);
 
@@ -13,6 +13,11 @@ typedef struct command {
   char * cmd_string;
   void (*cmd_function)(char * arg);
 } command_t;
+
+typedef struct buf_t {
+  u_int8_t buffer[MAX_BUF];
+  u_int8_t head, tail;
+} buf_t;
 
 command_t commands[] = {
   {"help",help_command},
@@ -22,6 +27,8 @@ command_t commands[] = {
   {0,0}
 };
 
+extern buf_t buf;
+buf->head = buf->tail = 0;
 
 int main(){
   /*
@@ -33,11 +40,34 @@ int main(){
   free(arg);*/
   
   char buf[20];
-  char c;
+  char ch;
   int n = 0;
   printf("\r\nSystem is up and running!\n\r");
   printf("\r\nSTM$");
   while(1){
+    if(buf->head != buf->tail && n<MAX_BUF){
+      ch = buf->buffer[buf->tail];
+      putchar(ch);
+      if(buf->tail == (MAX_BUF-1)){
+	buf->tail = 0;
+      }else{
+	buf->tail++;
+      }
+      if(ch == '\r' || ch == '\n'){
+	if(execute_command(buf)){
+	  print("OK\r\n");
+	}
+	n = 0;
+	printf("\r\nSTM$");
+      }
+      n++;
+    }else{
+      printf("\r\nNOK\r\n");
+      n=0;
+      printf("\r\nSTM$");
+    }
+    }
+  /* while(1){
     c = getchar();
     //putchar(c); for STM32, not cmd line run
     if(c == '\r' || c == '\n'){
@@ -48,7 +78,7 @@ int main(){
       buf[n] = c;
       n++;
       }
-  }
+      }*/
 }
 
 int execute_command(u_int8_t * line) {
@@ -83,22 +113,24 @@ int execute_command(u_int8_t * line) {
   }
   }
 int parse_command (char *line, char **command, char **args){
-  int i = 0;
-  //char *line_left;
-  char *line_temp = line;
-  //strcpy(line_left, line);
-  if(strchr(line, ',')==NULL){
-    *command = malloc(sizeof(line));
-    memcpy(*command, line, strlen(line)+1);
-    return 0;
+
+  char *line_temp;
+  if((!line) || (!command) || (!args)){ //check for bad pointer
+    return(-1); 
   }
-  i = strlen(line) - strlen(line_temp); //find index comma is at
-  *command = malloc(sizeof(char)*i);
-  memcpy(*command, line, i); //copy chars from line until the comma.
-    //printf("%c\n", command);
-  line = line+i+1;
-  *args = malloc(sizeof(line));
-  memcpy(*args, line, strlen(line)+1);
+  line_temp= line;
+  *command = line;
+  //strcpy(line_left, line);
+  while(*line_temp != ','){ //increment through input to find end of command
+    if(!*line_temp){
+      *args = '\0'; //no arguments
+      return(0);
+    }
+    line_temp++;
+  }
+
+  *line_temp = '\0'; //replace comma with null for end of command string
+  args = line_temp +1; //one char past null is beginning of arguments
   return 0;
 }
 void help_command(char *args){
@@ -113,6 +145,13 @@ void lof_command(){
 void lon_command(){
   printf("LED on\n");
 }
-void test_command(char *args){
+void test_command(char **args){
   printf("test\n");
+  //int i;
+  //i = strlen(args);
+  //printf("%d\n", i);
+  printf("%s\n", args[0]);
+  printf("%s\n", args[1]);
+  
+  
 }
