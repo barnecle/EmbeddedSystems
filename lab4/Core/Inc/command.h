@@ -7,7 +7,7 @@ typedef struct buf_t {
 
 typedef struct command {
   char * cmd_string;
-  void (*cmd_function)(char * arg);
+  int (*cmd_function)(char * arg);
 } command_t;
 
 extern buf_t buf;

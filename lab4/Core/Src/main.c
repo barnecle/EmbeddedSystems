@@ -54,6 +54,7 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 queue_t rx_queue;
 int led_on = 0;
+volatile int toggle = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,12 +63,12 @@ static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
-void help_command(char *args);
-void lof_command();
-void lon_command();
-void test_command(char *args);
-void dateSet_command(char *args);
-void timeSet_command(char *args);
+int help_command(char *args);
+int lof_command();
+int lon_command();
+int test_command(char *args);
+int dateSet_command(char *args);
+int timeSet_command(char *args);
 void printDateTime();
 int parse_command (uint8_t *line, uint8_t **command, uint8_t **args);
 int execute_command(uint8_t * line);
@@ -106,8 +107,8 @@ int main(void)
   /* USER CODE BEGIN Init */
   uint8_t command_line[QUEUE_SIZE];
   uint8_t ch;
-  RTC_DateTypeDef date;
-  RTC_TimeTypeDef time;
+  //RTC_DateTypeDef date;
+  //RTC_TimeTypeDef time;
   int n = 0;
   /* USER CODE END Init */
 
@@ -127,21 +128,26 @@ int main(void)
   LL_USART_EnableIT_RXNE(USART2);
   printf("\r\nSystem Running\n\r");
   printf("\r\nSTM$");
-  date.WeekDay = 1;
-  date.Month = 1;
-  date.Date = 1;
-  date.Year = 1;
-  time.Hours = 1;
-  time.Minutes = 1;
-  HAL_RTC_SetDate(&hrtc,&date,RTC_FORMAT_BIN);
-  HAL_RTC_SetTime(&hrtc,&time,RTC_FORMAT_BIN);
+  //date.WeekDay = 1;
+  //date.Month = 1;
+  //date.Date = 1;
+ // date.Year = 1;
+  //time.Hours = 1;
+  //time.Minutes = 1;
+  //HAL_RTC_SetDate(&hrtc,&date,RTC_FORMAT_BIN);
+  //HAL_RTC_SetTime(&hrtc,&time,RTC_FORMAT_BIN);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+	if(toggle){
+		HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+		HAL_Delay(100);
+		HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+		toggle = 0;
+	}
     if ((ch = dequeue(&rx_queue))) {
       putchar(ch);
       command_line[n] = ch;
@@ -286,16 +292,23 @@ static void MX_RTC_Init(void)
   */
   sAlarm.AlarmTime.Hours = 0x0;
   sAlarm.AlarmTime.Minutes = 0x0;
-  sAlarm.AlarmTime.Seconds = 0x0;
+  sAlarm.AlarmTime.Seconds = 0x30;
   sAlarm.AlarmTime.SubSeconds = 0x0;
   sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
-  sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
+  sAlarm.AlarmMask = RTC_ALARMMASK_DATEWEEKDAY|RTC_ALARMMASK_HOURS
+                              |RTC_ALARMMASK_MINUTES;
   sAlarm.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_ALL;
   sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
   sAlarm.AlarmDateWeekDay = 0x1;
   sAlarm.Alarm = RTC_ALARM_A;
-  if (HAL_RTC_SetAlarm(&hrtc, &sAlarm, RTC_FORMAT_BCD) != HAL_OK)
+  if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BCD) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Enable the WakeUp
+  */
+  if (HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 0, RTC_WAKEUPCLOCK_RTCCLK_DIV16, 0) != HAL_OK)
   {
     Error_Handler();
   }
@@ -370,7 +383,7 @@ int execute_command(uint8_t * line) {
   uint8_t *cmd;
   uint8_t *arg;
   command_t *p = commands;
-  int success = 0;
+  int success = 1;
 
   if (!line) {
     return (-1); // Passed a bad pointer
@@ -384,13 +397,13 @@ int execute_command(uint8_t * line) {
       if (!p->cmd_function) {
         return (-1);
       }
-      (*p->cmd_function)((char *)arg);            // Run the command with the passed arguments
-      success = 1;
+      success = (*p->cmd_function)((char *)arg);            // Run the command with the passed arguments
+      //success = 1;
       break;
     }
     p++;
   }
-  if (success) {
+  if (success == 0) {
     return (0);
   }
   else {
@@ -418,14 +431,15 @@ int parse_command (uint8_t *line, uint8_t **command, uint8_t **args){
   *args = line_temp +1; //one char past null is beginning of arguments
   return 0;
 }
-void help_command(char *args){
+int help_command(char *args){
   printf("\r\nAvailable Commands:\n\r");
   printf("lon\n\r");
   printf("lof\n\r");
   printf("test\n\r");
   printf("ds\n\r");
+  return 0;
 }
-void lon_command(){
+int lon_command(){
   if(led_on == 0){
     HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
     led_on = 1;
@@ -433,9 +447,9 @@ void lon_command(){
   }else{
     printf("\r\nLED ALREADY ON\n\r");
   }
-
+  return 0;
 }
-void lof_command(){
+int lof_command(){
   if(led_on == 1){
     HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
     led_on = 0;
@@ -443,9 +457,9 @@ void lof_command(){
   }else{
     printf("\r\nLED ALREADY OFF\n\r");
   }
-
+  return 0;
 }
-void test_command(char *args){
+int test_command(char *args){
   printf("\r\ntest\n\r");
   while(*args!='\0'){
     if(*args!=','){
@@ -455,6 +469,7 @@ void test_command(char *args){
     }
     args++;
   }
+  return 0;
 }
 void printDateTime(){
 	RTC_DateTypeDef date;
@@ -463,7 +478,7 @@ void printDateTime(){
 	HAL_RTC_GetDate(&hrtc,&date,RTC_FORMAT_BIN);
 	printf("%2.2u/%2.2u/%4.4u %2.2u:%2.2u:%2.2u",date.Month,date.Date,date.Year+2000,time.Hours,time.Minutes,time.Seconds);
 }
-void dateSet_command(char *args){
+int dateSet_command(char *args){
 	RTC_DateTypeDef date;
 	//HAL_StatusTypeDef hal;
 	int comma_count = 0;
@@ -477,21 +492,24 @@ void dateSet_command(char *args){
 	        start_of_num = args+1;
 	    }
 	    if(comma_count>2){
-	    	printf("\r\n error \n\r");
-	    	return;
+	    	//printf("\r\n error \n\r");
+	    	return 1;
 	    }
 	    args++;
 	  }
 	numbers[comma_count] = atoi(start_of_num);
+	if(numbers[0]>12 || numbers[0] < 1 || numbers[1] > 31 || numbers[1]<1 || numbers[2] > 100 || numbers[2]<0)
+		return 1;
 	date.WeekDay = 1;
 	date.Month = numbers[0];
 	date.Date = numbers[1];
 	date.Year = numbers[2];
 	HAL_RTC_SetDate(&hrtc,&date,RTC_FORMAT_BIN);
+	return 0;
 	//hal = HAL_RTC_SetDate(&hrtc,&date,RTC_FORMAT_BIN);
 	//printf("\r\n%x\r\n",hal);
 }
-void timeSet_command(char *args){
+int timeSet_command(char *args){
 	RTC_TimeTypeDef time;
 	int comma_count = 0;
 	char* start_of_num = args;
@@ -504,19 +522,26 @@ void timeSet_command(char *args){
 		    start_of_num = args+1;
 		}
 		if(comma_count>2){
-			printf("\r\n error \n\r");
-		    return;
+			//printf("\r\n error \n\r");
+		    return 1;
 		}
 		args++;
 	}
+	if(numbers[0]>24 || numbers[0] < 1 || numbers[1] > 60 || numbers[1]<1 || numbers[2] > 60 || numbers[2]< 1)
+		return 1;
 	numbers[comma_count] = atoi(start_of_num);
 	time.Hours = numbers[0];
 	time.Minutes = numbers[1];
 	time.Seconds = numbers[2];
 
 	HAL_RTC_SetTime(&hrtc,&time,RTC_FORMAT_BIN);
+	return 0;
 }
-
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
+{
+	toggle=1;
+	//HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+}
 /* USER CODE END 4 */
 
 /**
