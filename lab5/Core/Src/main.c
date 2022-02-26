@@ -28,6 +28,8 @@
 #include <retarget.h>
 #include <command.h>
 #include "queue.h"
+#include "temp.h"
+#include "battery.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,9 +49,11 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc2;
+ADC_HandleTypeDef hadc1;
 
 RTC_HandleTypeDef hrtc;
+
+TIM_HandleTypeDef htim2;
 
 UART_HandleTypeDef huart2;
 
@@ -57,6 +61,8 @@ UART_HandleTypeDef huart2;
 queue_t rx_queue;
 int led_on = 0;
 volatile int toggle = 0;
+volatile uint32_t period = 0;
+volatile uint32_t timer_done = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -64,7 +70,8 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_RTC_Init(void);
-static void MX_ADC2_Init(void);
+static void MX_ADC1_Init(void);
+static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 int help_command(char *args);
 int lof_command();
@@ -81,6 +88,35 @@ int battery_command();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
+  enum {EDGE1,EDGE2};
+  static uint32_t last = 0;
+  static uint32_t state = EDGE1;
+  uint32_t next;
+  if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1){
+	  next = htim->Instance->CCR1;
+	  switch(state){
+	  case EDGE1:
+		  last = next;
+		  state = EDGE2;
+		  break;
+	  case EDGE2:
+		  if(next>last){
+			  period = next-last;
+		  }
+		  else{
+			  period = htim->Instance->ARR - last + next;
+		  }
+		  state = EDGE1;
+		  HAL_TIM_IC_Stop_IT(&htim2,TIM_CHANNEL_1);
+		  timer_done = 1;
+		  break;
+	  default:
+		  state = EDGE1;
+		  break;
+	  }
+  }
+}
 /* USER CODE BEGIN 0 */
 command_t commands[] = {
   {"help",help_command},
@@ -132,10 +168,11 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_RTC_Init();
-  MX_ADC2_Init();
+  MX_ADC1_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  HAL_ADC_Init(&hadc2); // Initialize the A2D
-  while (HAL_ADCEx_Calibration_Start(&hadc2,ADC_SINGLE_ENDED) != HAL_OK);   // Calibrate the A2D
+  HAL_ADC_Init(&hadc1); // Initialize the A2D
+  while (HAL_ADCEx_Calibration_Start(&hadc1,ADC_SINGLE_ENDED) != HAL_OK);   // Calibrate the A2D
   RetargetInit(&huart2);
   LL_USART_EnableIT_RXNE(USART2);
   printf("\r\nSystem Running\n\r");
@@ -242,61 +279,66 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief ADC2 Initialization Function
+  * @brief ADC1 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_ADC2_Init(void)
+static void MX_ADC1_Init(void)
 {
 
-  /* USER CODE BEGIN ADC2_Init 0 */
+  /* USER CODE BEGIN ADC1_Init 0 */
 
-  /* USER CODE END ADC2_Init 0 */
+  /* USER CODE END ADC1_Init 0 */
 
+  ADC_MultiModeTypeDef multimode = {0};
   ADC_ChannelConfTypeDef sConfig = {0};
 
-  /* USER CODE BEGIN ADC2_Init 1 */
+  /* USER CODE BEGIN ADC1_Init 1 */
 
-  /* USER CODE END ADC2_Init 1 */
+  /* USER CODE END ADC1_Init 1 */
   /** Common config
   */
-  hadc2.Instance = ADC2;
-  hadc2.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
-  hadc2.Init.Resolution = ADC_RESOLUTION_12B;
-  hadc2.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc2.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc2.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-  hadc2.Init.LowPowerAutoWait = DISABLE;
-  hadc2.Init.ContinuousConvMode = DISABLE;
-  hadc2.Init.NbrOfConversion = 1;
-  hadc2.Init.DiscontinuousConvMode = DISABLE;
-  hadc2.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc2.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-  hadc2.Init.DMAContinuousRequests = DISABLE;
-  hadc2.Init.Overrun = ADC_OVR_DATA_PRESERVED;
-  hadc2.Init.OversamplingMode = DISABLE;
-  if (HAL_ADC_Init(&hadc2) != HAL_OK)
+  hadc1.Instance = ADC1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV128;
+  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  hadc1.Init.LowPowerAutoWait = DISABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.NbrOfConversion = 1;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.DMAContinuousRequests = DISABLE;
+  hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
+  hadc1.Init.OversamplingMode = DISABLE;
+  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure the ADC multi-mode
+  */
+  multimode.Mode = ADC_MODE_INDEPENDENT;
+  if (HAL_ADCEx_MultiModeConfigChannel(&hadc1, &multimode) != HAL_OK)
   {
     Error_Handler();
   }
   /** Configure Regular Channel
   */
-  sConfig.Channel = ADC_CHANNEL_10;
+  sConfig.Channel = ADC_CHANNEL_TEMPSENSOR;
   sConfig.Rank = ADC_REGULAR_RANK_1;
   sConfig.SamplingTime = ADC_SAMPLETIME_2CYCLES_5;
   sConfig.SingleDiff = ADC_SINGLE_ENDED;
   sConfig.OffsetNumber = ADC_OFFSET_NONE;
   sConfig.Offset = 0;
-  if (HAL_ADC_ConfigChannel(&hadc2, &sConfig) != HAL_OK)
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN ADC2_Init 2 */
-  sConfig.Channel = ADC_CHANNEL_TEMPSENSOR;
-  sConfig.Rank = 2;
-  sConfig.SamplingTime = ADC_SAMPLETIME_640CYCLES_5;
-  HAL_ADC_ConfigChannel(&hadc2, &sConfig);
-  /* USER CODE END ADC2_Init 2 */
+  /* USER CODE BEGIN ADC1_Init 2 */
+
+  /* USER CODE END ADC1_Init 2 */
 
 }
 
@@ -386,6 +428,55 @@ static void MX_RTC_Init(void)
   /* USER CODE BEGIN RTC_Init 2 */
 
   /* USER CODE END RTC_Init 2 */
+
+}
+
+/**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_IC_InitTypeDef sConfigIC = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 0;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 4294967295;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_IC_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+  sConfigIC.ICFilter = 0;
+  if (HAL_TIM_IC_ConfigChannel(&htim2, &sConfigIC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+  HAL_TIM_Base_Start_IT(&htim2);   // Turn on the IRQ in the timer
+  HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_1); // Turn on the IRQ for CH1 input capture
+  /* USER CODE END TIM2_Init 2 */
 
 }
 
@@ -613,28 +704,50 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
 	toggle=1;
 	//HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
 }
-int tsl237_command(){
+int tsl237_command(char* args){
+	  //float clock_period;
+	  //float sensor_period;
+	  float sensor_frequency;
 
+	  if (args) {
+	    return 1;
+	  }
+	  else {
+		timer_done = 0;
+		HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_1);
+		while(!timer_done);
+
+
+	    //clock_period = SystemCoreClock;
+	    //clock_period = 1/clock_period;
+	    //sensor_period = clock_period * (float) period;
+	    sensor_frequency = (1.0/((float)period/(float)SystemCoreClock));
+	    printf("\r\n%d.%d hz\r\n", (int) sensor_frequency, ((int)(sensor_frequency*100)%100));
+	    return 0;
+	  }
 }
-int temp_command(){
-   // uint16_t rawValue;
-    float temp = 32.75;
-    uint8_t decimal;
-    uint8_t number;
-	//HAL_ADC_PollForConversion(&hadc2, HAL_MAX_DELAY);
-
-	//rawValue = HAL_ADC_GetValue(&hadc2);
-	//temp = ((float)rawValue) / 4095 * 3300;
-	//temp = ((temp - 760.0) / 2.5) + 30;
-	number = (int)temp/1;
-	temp = temp*100;
-	decimal = (int)temp%100;
-	printf("\r\nTemperature: %d.%d\r\n", number, decimal);
-	return 0;
-
+int temp_command(char *args){
+	  if (args) {
+	    return 1;
+	  }
+	  else {
+	    printf("\n\r%d\n\r",(int)read_temp());
+	    return 0;
+	  }
+	  return 2;
 }
-int battery_command(){
 
+int battery_command(char *args) {
+  uint32_t battery_voltage;
+  if (args) {
+    return 1;
+  }
+  else {
+    battery_voltage = read_vrefint();
+    printf("\r\n%d.%03d\r\n",(int)battery_voltage/1000,(int)battery_voltage%1000);
+    return 0;
+  }
+  return 2;
 }
 /* USER CODE END 4 */
 

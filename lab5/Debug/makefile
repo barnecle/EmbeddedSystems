@@ -60,8 +60,8 @@ all: main-build
 main-build: lab5.elf secondary-outputs
 
 # Tool invocations
-lab5.elf: $(OBJS) $(USER_OBJS) C:\Users\theba\STM32CubeIDE\workspace_1.8.0\lab5\STM32L412KBUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "lab5.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\theba\STM32CubeIDE\workspace_1.8.0\lab5\STM32L412KBUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+lab5.elf: $(OBJS) $(USER_OBJS) /Users/michaelmitschjr/Desktop/E314/ES-SPRING-2022/lab5/STM32L412KBUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "lab5.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/michaelmitschjr/Desktop/E314/ES-SPRING-2022/lab5/STM32L412KBUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

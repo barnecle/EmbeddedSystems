@@ -57,6 +57,7 @@ void PendSV_Handler(void);
 void SysTick_Handler(void);
 void RTC_WKUP_IRQHandler(void);
 void ADC1_2_IRQHandler(void);
+void TIM2_IRQHandler(void);
 void USART2_IRQHandler(void);
 void RTC_Alarm_IRQHandler(void);
 /* USER CODE BEGIN EFP */
