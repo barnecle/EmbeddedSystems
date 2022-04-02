@@ -455,17 +455,6 @@ Wire Wire Line
 Text Label 5950 6100 0    50   ~ 0
 tsl237_freq
 $Comp
-L power:VDD #PWR0118
-U 1 1 62401D92
-P 3950 5150
-F 0 "#PWR0118" H 3950 5000 50  0001 C CNN
-F 1 "VDD" H 3965 5323 50  0000 C CNN
-F 2 "" H 3950 5150 50  0001 C CNN
-F 3 "" H 3950 5150 50  0001 C CNN
-	1    3950 5150
-	1    0    0    -1  
-$EndComp
-$Comp
 L pspice:CAP C1
 U 1 1 6240251C
 P 3950 5400
@@ -758,4 +747,6 @@ Wire Wire Line
 Connection ~ 1950 2200
 Wire Wire Line
 	1950 2200 1950 2400
+Text Label 3950 5150 0    50   ~ 0
+sensor_pwr
 $EndSCHEMATC
