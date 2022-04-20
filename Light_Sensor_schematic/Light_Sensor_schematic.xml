@@ -1,102 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<export version="D">
+<export version="E">
   <design>
-    <source>C:\Users\theba\Documents\IU\SP22\ES-SPRING-2022\Light_Sensor_schematic\Light_Sensor_schematic.sch</source>
-    <date>3/25/2022 11:48:45 AM</date>
-    <tool>Eeschema (5.1.9)-1</tool>
+    <source>C:\Users\theba\Documents\IU\SP22\ES-SPRING-2022\Light_Sensor_schematic\Light_Sensor_schematic.kicad_sch</source>
+    <date>4/19/2022 11:41:50 PM</date>
+    <tool>Eeschema (6.0.4)</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title/>
         <company/>
         <rev/>
         <date/>
-        <source>Light_Sensor_schematic.sch</source>
+        <source>Light_Sensor_schematic.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
         <comment number="3" value=""/>
         <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
       </title_block>
     </sheet>
   </design>
   <components>
-    <comp ref="U1">
-      <value>STM32L432KCUx</value>
-      <footprint>Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm</footprint>
-      <datasheet>http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00257205.pdf</datasheet>
-      <libsource lib="MCU_ST_STM32L4" part="STM32L432KCUx" description="ARM Cortex-M4 MCU, 256KB flash, 64KB RAM, 80MHz, 1.71-3.6V, 26 GPIO, UFQFPN-32"/>
+    <comp ref="BT1">
+      <value>Battery_Cell</value>
+      <footprint>Battery:BatteryHolder_Keystone_1060_1x2032</footprint>
+      <libsource lib="Device" part="Battery_Cell" description="Single-cell battery"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>623CEB4F</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000623ef0bf</tstamps>
     </comp>
-    <comp ref="C6">
-      <value>0.1uF</value>
+    <comp ref="C1">
+      <value>1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder</footprint>
-      <datasheet>~</datasheet>
       <libsource lib="pspice" part="CAP" description="Capacitor symbol for simulation only"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>623D0D1F</tstamp>
+      <tstamps>00000000-0000-0000-0000-00006240251c</tstamps>
     </comp>
     <comp ref="C2">
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder</footprint>
-      <datasheet>~</datasheet>
       <libsource lib="pspice" part="CAP" description="Capacitor symbol for simulation only"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>623D11F5</tstamp>
-    </comp>
-    <comp ref="TP1">
-      <value>TestPoint</value>
-      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Connector" part="TestPoint" description="test point"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>623D7F74</tstamp>
-    </comp>
-    <comp ref="U3">
-      <value>TG-3541CE</value>
-      <footprint>e314:TG-3541CE</footprint>
-      <libsource lib="e314_lib" part="TG-3541CE" description=""/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>623DEE5E</tstamp>
-    </comp>
-    <comp ref="TP2">
-      <value>TestPoint</value>
-      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Connector" part="TestPoint" description="test point"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>623E203F</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000623d11f5</tstamps>
     </comp>
     <comp ref="C4">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder</footprint>
-      <datasheet>~</datasheet>
       <libsource lib="pspice" part="CAP" description="Capacitor symbol for simulation only"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>623E820C</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000623e820c</tstamps>
     </comp>
-    <comp ref="J3">
-      <value>Conn_01x04_Male</value>
-      <footprint>Connector_JST:JST_XH_B4B-XH-AM_1x04_P2.50mm_Vertical</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Connector" part="Conn_01x04_Male" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+    <comp ref="C6">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder</footprint>
+      <libsource lib="pspice" part="CAP" description="Capacitor symbol for simulation only"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>623EB334</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000623d0d1f</tstamps>
     </comp>
-    <comp ref="JP2">
-      <value>Jumper_3_Open</value>
-      <footprint>Jumper:SolderJumper-3_P1.3mm_Open_RoundedPad1.0x1.5mm</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Jumper" part="Jumper_3_Open" description="Jumper, 3-pole, both open"/>
+    <comp ref="H1">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_2.2mm_M2_Pad_Via</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>623EDDAE</tstamp>
+      <tstamps>00000000-0000-0000-0000-000062419157</tstamps>
     </comp>
-    <comp ref="BT1">
-      <value>Battery_Cell</value>
-      <footprint>Battery:BatteryHolder_Keystone_1060_1x2032</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Device" part="Battery_Cell" description="Single-cell battery"/>
+    <comp ref="H2">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_2.2mm_M2_Pad_Via</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>623EF0BF</tstamp>
+      <tstamps>00000000-0000-0000-0000-000062419a90</tstamps>
+    </comp>
+    <comp ref="H3">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_2.2mm_M2_Pad_Via</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-00006241a411</tstamps>
+    </comp>
+    <comp ref="H4">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_2.2mm_M2_Pad_Via</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-00006241ad42</tstamps>
     </comp>
     <comp ref="IC1">
       <value>TSL237S-LF</value>
@@ -109,91 +116,178 @@
         <field name="Mouser Part Number">856-TSL237S-LF</field>
         <field name="Mouser Price/Stock">https://www.mouser.com/Search/Refine.aspx?Keyword=856-TSL237S-LF</field>
       </fields>
-      <libsource lib="e314_lib" part="TSL237S-LF" description="Light To Frequency &amp; Light To Voltage Light to Frequency High Responsivity"/>
+      <libsource lib="e314_lib" part="TSL237S-LF" description=""/>
+      <property name="Description" value="Light To Frequency &amp; Light To Voltage Light to Frequency High Responsivity"/>
+      <property name="Mouser Part Number" value="856-TSL237S-LF"/>
+      <property name="Mouser Price/Stock" value="https://www.mouser.com/Search/Refine.aspx?Keyword=856-TSL237S-LF"/>
+      <property name="Manufacturer_Name" value="ams"/>
+      <property name="Manufacturer_Part_Number" value="TSL237S-LF"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>623FA34A</tstamp>
-    </comp>
-    <comp ref="TP6">
-      <value>TestPoint</value>
-      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Connector" part="TestPoint" description="test point"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>623FB0CC</tstamp>
-    </comp>
-    <comp ref="C1">
-      <value>1uF</value>
-      <footprint>Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="pspice" part="CAP" description="Capacitor symbol for simulation only"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>6240251C</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000623fa34a</tstamps>
     </comp>
     <comp ref="J1">
       <value>Conn_01x03</value>
       <footprint>Connector_JST:JST_XH_B3B-XH-AM_1x03_P2.50mm_Vertical</footprint>
-      <datasheet>~</datasheet>
       <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>6240F34C</tstamp>
+      <tstamps>00000000-0000-0000-0000-00006240f34c</tstamps>
+    </comp>
+    <comp ref="J3">
+      <value>Conn_01x04_Male</value>
+      <footprint>Connector_JST:JST_XH_B4B-XH-AM_1x04_P2.50mm_Vertical</footprint>
+      <libsource lib="Connector" part="Conn_01x04_Male" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-0000623eb334</tstamps>
+    </comp>
+    <comp ref="JP2">
+      <value>Jumper_3_Open</value>
+      <footprint>Jumper:SolderJumper-3_P1.3mm_Open_RoundedPad1.0x1.5mm</footprint>
+      <libsource lib="Light_Sensor_schematic-rescue" part="Jumper_3_Open-Jumper" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-0000623eddae</tstamps>
     </comp>
     <comp ref="R3">
       <value>200</value>
       <footprint>Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder</footprint>
-      <datasheet>~</datasheet>
       <libsource lib="pspice" part="R" description="Resistor symbol for simulation only"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>624103BC</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000624103bc</tstamps>
     </comp>
     <comp ref="R4">
       <value>200</value>
       <footprint>Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder</footprint>
-      <datasheet>~</datasheet>
       <libsource lib="pspice" part="R" description="Resistor symbol for simulation only"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>624111AF</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000624111af</tstamps>
     </comp>
-    <comp ref="H1">
-      <value>MountingHole</value>
-      <footprint>MountingHole:MountingHole_2.2mm_M2_Pad_Via</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+    <comp ref="TP1">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>62419157</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000623d7f74</tstamps>
     </comp>
-    <comp ref="H2">
-      <value>MountingHole</value>
-      <footprint>MountingHole:MountingHole_2.2mm_M2_Pad_Via</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+    <comp ref="TP2">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>62419A90</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000623e203f</tstamps>
     </comp>
-    <comp ref="H3">
-      <value>MountingHole</value>
-      <footprint>MountingHole:MountingHole_2.2mm_M2_Pad_Via</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+    <comp ref="TP6">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>6241A411</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000623fb0cc</tstamps>
     </comp>
-    <comp ref="H4">
-      <value>MountingHole</value>
-      <footprint>MountingHole:MountingHole_2.2mm_M2_Pad_Via</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+    <comp ref="U1">
+      <value>STM32L432KCUx</value>
+      <footprint>Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm</footprint>
+      <datasheet>http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00257205.pdf</datasheet>
+      <libsource lib="MCU_ST_STM32L4" part="STM32L432KCUx" description="ARM Cortex-M4 MCU, 256KB flash, 64KB RAM, 80MHz, 1.71-3.6V, 26 GPIO, UFQFPN-32"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>6241AD42</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000623ceb4f</tstamps>
     </comp>
     <comp ref="U2">
       <value>STDC14</value>
       <footprint>e314:ftsh_14p_connector</footprint>
       <libsource lib="e314_lib" part="STDC14" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>623DBB90</tstamp>
+      <tstamps>00000000-0000-0000-0000-0000623dbb90</tstamps>
+    </comp>
+    <comp ref="U3">
+      <value>TG-3541CE</value>
+      <footprint>e314:TG-3541CE</footprint>
+      <libsource lib="e314_lib" part="TG-3541CE" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="C:/Users/theba/Documents/IU/SP22/ES-SPRING-2022/Light_Sensor_schematic/Light_Sensor_schematic.sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-0000623dee5e</tstamps>
     </comp>
   </components>
   <libparts>
+    <libpart lib="" part="e314_lib_STDC14">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">e314_lib_STDC14</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Reserved" type="bidirectional"/>
+        <pin num="2" name="Reserved" type="bidirectional"/>
+        <pin num="3" name="T_VCC" type="bidirectional"/>
+        <pin num="4" name="SWDIO" type="bidirectional"/>
+        <pin num="5" name="GND" type="power_out"/>
+        <pin num="6" name="SWCLK" type="bidirectional"/>
+        <pin num="7" name="GND" type="power_out"/>
+        <pin num="8" name="SWO" type="bidirectional"/>
+        <pin num="9" name="JRCLK" type="bidirectional"/>
+        <pin num="10" name="JTDI" type="bidirectional"/>
+        <pin num="11" name="GNDDetect" type="power_in"/>
+        <pin num="12" name="NRST" type="bidirectional"/>
+        <pin num="13" name="VCP_RX" type="bidirectional"/>
+        <pin num="14" name="VCP_TX" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="" part="e314_lib_TG-3541CE">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">e314_lib_TG-3541CE</field>
+      </fields>
+      <pins>
+        <pin num="1" name="OE" type="input"/>
+        <pin num="2" name="VCC" type="power_in"/>
+        <pin num="3" name="VCC" type="power_in"/>
+        <pin num="4" name="OUT" type="output"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="6" name="NC" type="no_connect"/>
+        <pin num="7" name="GND" type="power_in"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="GND" type="power_in"/>
+        <pin num="10" name="NC" type="no_connect"/>
+      </pins>
+    </libpart>
+    <libpart lib="" part="e314_lib_TSL237S-LF">
+      <docs>https://componentsearchengine.com/Datasheets/1/TSL237S-LF.pdf</docs>
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">e314_lib_TSL237S-LF</field>
+        <field name="Footprint">TSL237S-LF</field>
+        <field name="Datasheet">https://componentsearchengine.com/Datasheets/1/TSL237S-LF.pdf</field>
+        <field name="Description">Light To Frequency &amp; Light To Voltage Light to Frequency High Responsivity</field>
+        <field name="Mouser Part Number">856-TSL237S-LF</field>
+        <field name="Mouser Price/Stock">https://www.mouser.com/Search/Refine.aspx?Keyword=856-TSL237S-LF</field>
+        <field name="Manufacturer_Name">ams</field>
+        <field name="Manufacturer_Part_Number">TSL237S-LF</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VDD" type="power_in"/>
+        <pin num="3" name="OUT" type="bidirectional"/>
+      </pins>
+    </libpart>
     <libpart lib="Connector" part="Conn_01x04_Male">
       <description>Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <docs>~</docs>
@@ -203,6 +297,7 @@
       <fields>
         <field name="Reference">J</field>
         <field name="Value">Conn_01x04_Male</field>
+        <field name="Datasheet">~</field>
       </fields>
       <pins>
         <pin num="1" name="Pin_1" type="passive"/>
@@ -221,6 +316,7 @@
       <fields>
         <field name="Reference">TP</field>
         <field name="Value">TestPoint</field>
+        <field name="Datasheet">~</field>
       </fields>
       <pins>
         <pin num="1" name="1" type="passive"/>
@@ -235,6 +331,7 @@
       <fields>
         <field name="Reference">J</field>
         <field name="Value">Conn_01x03</field>
+        <field name="Datasheet">~</field>
       </fields>
       <pins>
         <pin num="1" name="Pin_1" type="passive"/>
@@ -248,15 +345,14 @@
       <fields>
         <field name="Reference">BT</field>
         <field name="Value">Battery_Cell</field>
+        <field name="Datasheet">~</field>
       </fields>
       <pins>
         <pin num="1" name="+" type="passive"/>
         <pin num="2" name="-" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Jumper" part="Jumper_3_Open">
-      <description>Jumper, 3-pole, both open</description>
-      <docs>~</docs>
+    <libpart lib="Light_Sensor_schematic-rescue" part="Jumper_3_Open-Jumper">
       <footprints>
         <fp>Jumper*</fp>
         <fp>TestPoint*3Pads*</fp>
@@ -264,7 +360,7 @@
       </footprints>
       <fields>
         <field name="Reference">JP</field>
-        <field name="Value">Jumper_3_Open</field>
+        <field name="Value">Jumper_3_Open-Jumper</field>
       </fields>
       <pins>
         <pin num="1" name="A" type="passive"/>
@@ -272,52 +368,50 @@
         <pin num="3" name="B" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="MCU_ST_STM32L4" part="STM32L432KBUx">
-      <aliases>
-        <alias>STM32L432KCUx</alias>
-      </aliases>
-      <description>ARM Cortex-M4 MCU, 128KB flash, 64KB RAM, 80MHz, 1.71-3.6V, 26 GPIO, UFQFPN-32</description>
+    <libpart lib="MCU_ST_STM32L4" part="STM32L432KCUx">
+      <description>ARM Cortex-M4 MCU, 256KB flash, 64KB RAM, 80MHz, 1.71-3.6V, 26 GPIO, UFQFPN-32</description>
       <docs>http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00257205.pdf</docs>
       <footprints>
         <fp>QFN*1EP*5x5mm*P0.5mm*</fp>
       </footprints>
       <fields>
         <field name="Reference">U</field>
-        <field name="Value">STM32L432KBUx</field>
+        <field name="Value">STM32L432KCUx</field>
         <field name="Footprint">Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm</field>
+        <field name="Datasheet">http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00257205.pdf</field>
       </fields>
       <pins>
         <pin num="1" name="VDD" type="power_in"/>
-        <pin num="2" name="PC14" type="BiDi"/>
-        <pin num="3" name="PC15" type="BiDi"/>
+        <pin num="2" name="PC14" type="bidirectional"/>
+        <pin num="3" name="PC15" type="bidirectional"/>
         <pin num="4" name="NRST" type="input"/>
         <pin num="5" name="VDDA" type="power_in"/>
-        <pin num="6" name="PA0" type="BiDi"/>
-        <pin num="7" name="PA1" type="BiDi"/>
-        <pin num="8" name="PA2" type="BiDi"/>
-        <pin num="9" name="PA3" type="BiDi"/>
-        <pin num="10" name="PA4" type="BiDi"/>
-        <pin num="11" name="PA5" type="BiDi"/>
-        <pin num="12" name="PA6" type="BiDi"/>
-        <pin num="13" name="PA7" type="BiDi"/>
-        <pin num="14" name="PB0" type="BiDi"/>
-        <pin num="15" name="PB1" type="BiDi"/>
+        <pin num="6" name="PA0" type="bidirectional"/>
+        <pin num="7" name="PA1" type="bidirectional"/>
+        <pin num="8" name="PA2" type="bidirectional"/>
+        <pin num="9" name="PA3" type="bidirectional"/>
+        <pin num="10" name="PA4" type="bidirectional"/>
+        <pin num="11" name="PA5" type="bidirectional"/>
+        <pin num="12" name="PA6" type="bidirectional"/>
+        <pin num="13" name="PA7" type="bidirectional"/>
+        <pin num="14" name="PB0" type="bidirectional"/>
+        <pin num="15" name="PB1" type="bidirectional"/>
         <pin num="16" name="VSS" type="power_in"/>
         <pin num="17" name="VDD" type="power_in"/>
-        <pin num="18" name="PA8" type="BiDi"/>
-        <pin num="19" name="PA9" type="BiDi"/>
-        <pin num="20" name="PA10" type="BiDi"/>
-        <pin num="21" name="PA11" type="BiDi"/>
-        <pin num="22" name="PA12" type="BiDi"/>
-        <pin num="23" name="PA13" type="BiDi"/>
-        <pin num="24" name="PA14" type="BiDi"/>
-        <pin num="25" name="PA15" type="BiDi"/>
-        <pin num="26" name="PB3" type="BiDi"/>
-        <pin num="27" name="PB4" type="BiDi"/>
-        <pin num="28" name="PB5" type="BiDi"/>
-        <pin num="29" name="PB6" type="BiDi"/>
-        <pin num="30" name="PB7" type="BiDi"/>
-        <pin num="31" name="PH3" type="BiDi"/>
+        <pin num="18" name="PA8" type="bidirectional"/>
+        <pin num="19" name="PA9" type="bidirectional"/>
+        <pin num="20" name="PA10" type="bidirectional"/>
+        <pin num="21" name="PA11" type="bidirectional"/>
+        <pin num="22" name="PA12" type="bidirectional"/>
+        <pin num="23" name="PA13" type="bidirectional"/>
+        <pin num="24" name="PA14" type="bidirectional"/>
+        <pin num="25" name="PA15" type="bidirectional"/>
+        <pin num="26" name="PB3" type="bidirectional"/>
+        <pin num="27" name="PB4" type="bidirectional"/>
+        <pin num="28" name="PB5" type="bidirectional"/>
+        <pin num="29" name="PB6" type="bidirectional"/>
+        <pin num="30" name="PB7" type="bidirectional"/>
+        <pin num="31" name="PH3" type="bidirectional"/>
         <pin num="32" name="VSS" type="power_in"/>
         <pin num="33" name="VSS" type="power_in"/>
       </pins>
@@ -331,81 +425,20 @@
       <fields>
         <field name="Reference">H</field>
         <field name="Value">MountingHole</field>
+        <field name="Datasheet">~</field>
       </fields>
-    </libpart>
-    <libpart lib="e314_lib" part="STDC14">
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">STDC14</field>
-      </fields>
-      <pins>
-        <pin num="1" name="Reserved" type="BiDi"/>
-        <pin num="2" name="Reserved" type="BiDi"/>
-        <pin num="3" name="T_VCC" type="BiDi"/>
-        <pin num="4" name="SWDIO" type="BiDi"/>
-        <pin num="5" name="GND" type="power_out"/>
-        <pin num="6" name="SWCLK" type="BiDi"/>
-        <pin num="7" name="GND" type="power_out"/>
-        <pin num="8" name="SWO" type="BiDi"/>
-        <pin num="9" name="JRCLK" type="BiDi"/>
-        <pin num="10" name="JTDI" type="BiDi"/>
-        <pin num="11" name="GNDDetect" type="power_in"/>
-        <pin num="12" name="NRST" type="BiDi"/>
-        <pin num="13" name="VCP_RX" type="BiDi"/>
-        <pin num="14" name="VCP_TX" type="BiDi"/>
-      </pins>
-    </libpart>
-    <libpart lib="e314_lib" part="TG-3541CE">
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">TG-3541CE</field>
-      </fields>
-      <pins>
-        <pin num="1" name="OE" type="input"/>
-        <pin num="2" name="VCC" type="power_in"/>
-        <pin num="3" name="VCC" type="power_in"/>
-        <pin num="4" name="OUT" type="output"/>
-        <pin num="5" name="GND" type="power_in"/>
-        <pin num="6" name="NC" type="NotConnected"/>
-        <pin num="7" name="GND" type="power_in"/>
-        <pin num="8" name="GND" type="power_in"/>
-        <pin num="9" name="GND" type="power_in"/>
-        <pin num="10" name="NC" type="NotConnected"/>
-      </pins>
-    </libpart>
-    <libpart lib="e314_lib" part="TSL237S-LF">
-      <description>Light To Frequency &amp; Light To Voltage Light to Frequency High Responsivity</description>
-      <docs>https://componentsearchengine.com/Datasheets/1/TSL237S-LF.pdf</docs>
-      <fields>
-        <field name="Reference">IC</field>
-        <field name="Value">TSL237S-LF</field>
-        <field name="Footprint">TSL237S-LF</field>
-        <field name="Datasheet">https://componentsearchengine.com/Datasheets/1/TSL237S-LF.pdf</field>
-        <field name="Description">Light To Frequency &amp; Light To Voltage Light to Frequency High Responsivity</field>
-        <field name="Mouser Part Number">856-TSL237S-LF</field>
-        <field name="Mouser Price/Stock">https://www.mouser.com/Search/Refine.aspx?Keyword=856-TSL237S-LF</field>
-        <field name="Manufacturer_Name">ams</field>
-        <field name="Manufacturer_Part_Number">TSL237S-LF</field>
-      </fields>
-      <pins>
-        <pin num="1" name="GND" type="power_in"/>
-        <pin num="2" name="VDD" type="power_in"/>
-        <pin num="3" name="OUT" type="BiDi"/>
-      </pins>
     </libpart>
     <libpart lib="pspice" part="CAP">
-      <aliases>
-        <alias>C</alias>
-      </aliases>
       <description>Capacitor symbol for simulation only</description>
       <docs>~</docs>
       <fields>
         <field name="Reference">C</field>
         <field name="Value">CAP</field>
+        <field name="Datasheet">~</field>
       </fields>
       <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="pspice" part="R">
@@ -414,206 +447,204 @@
       <fields>
         <field name="Reference">R</field>
         <field name="Value">R</field>
+        <field name="Datasheet">~</field>
       </fields>
       <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
       </pins>
     </libpart>
   </libparts>
   <libraries>
     <library logical="Connector">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Connector.lib</uri>
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Connector.kicad_sym</uri>
     </library>
     <library logical="Connector_Generic">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Connector_Generic.lib</uri>
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Connector_Generic.kicad_sym</uri>
     </library>
     <library logical="Device">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Device.kicad_sym</uri>
     </library>
-    <library logical="Jumper">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Jumper.lib</uri>
+    <library logical="Light_Sensor_schematic-rescue">
+      <uri>C:\Users\theba\Documents\IU\SP22\ES-SPRING-2022\Light_Sensor_schematic/Light_Sensor_schematic-rescue.lib</uri>
     </library>
     <library logical="MCU_ST_STM32L4">
-      <uri>C:\Program Files\KiCad\share\kicad\library/MCU_ST_STM32L4.lib</uri>
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/MCU_ST_STM32L4.kicad_sym</uri>
     </library>
     <library logical="Mechanical">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Mechanical.lib</uri>
-    </library>
-    <library logical="e314_lib">
-      <uri>C:\Users\theba\Documents\IU\SP22\ES-SPRING-2022\kicad\parts\e314-2020.lib</uri>
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Mechanical.kicad_sym</uri>
     </library>
     <library logical="pspice">
-      <uri>C:\Program Files\KiCad\share\kicad\library/pspice.lib</uri>
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/pspice.kicad_sym</uri>
     </library>
   </libraries>
   <nets>
-    <net code="1" name="/tsl237_freq">
-      <node ref="IC1" pin="3"/>
-      <node ref="U1" pin="6"/>
-      <node ref="TP6" pin="1"/>
+    <net code="1" name="/CLKOUT">
+      <node ref="TP1" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="18" pinfunction="PA8" pintype="bidirectional"/>
     </net>
-    <net code="2" name="GND">
-      <node ref="C2" pin="2"/>
-      <node ref="U2" pin="11"/>
-      <node ref="U1" pin="33"/>
-      <node ref="C6" pin="2"/>
-      <node ref="U3" pin="5"/>
-      <node ref="C1" pin="2"/>
-      <node ref="U3" pin="9"/>
-      <node ref="U3" pin="8"/>
-      <node ref="U3" pin="7"/>
-      <node ref="U1" pin="16"/>
-      <node ref="U1" pin="31"/>
-      <node ref="U1" pin="32"/>
-      <node ref="J1" pin="1"/>
-      <node ref="U2" pin="7"/>
-      <node ref="BT1" pin="2"/>
-      <node ref="IC1" pin="1"/>
-      <node ref="U2" pin="5"/>
-      <node ref="J3" pin="4"/>
-      <node ref="C4" pin="2"/>
+    <net code="2" name="/NRST">
+      <node ref="U1" pin="4" pinfunction="NRST" pintype="input"/>
+      <node ref="U2" pin="12" pinfunction="NRST" pintype="bidirectional"/>
     </net>
-    <net code="3" name="VDD">
-      <node ref="C2" pin="1"/>
-      <node ref="JP2" pin="2"/>
-      <node ref="C4" pin="1"/>
-      <node ref="U1" pin="17"/>
-      <node ref="U1" pin="5"/>
-      <node ref="U1" pin="1"/>
-      <node ref="C1" pin="1"/>
-      <node ref="U3" pin="3"/>
-      <node ref="U3" pin="1"/>
-      <node ref="C6" pin="1"/>
-      <node ref="U3" pin="2"/>
-      <node ref="U2" pin="3"/>
+    <net code="3" name="/RX">
+      <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="U1" pin="9" pinfunction="PA3" pintype="bidirectional"/>
+      <node ref="U2" pin="13" pinfunction="VCP_RX" pintype="bidirectional"/>
     </net>
-    <net code="4" name="/sensor_pwr">
-      <node ref="U1" pin="10"/>
-      <node ref="IC1" pin="2"/>
+    <net code="4" name="/SWDCLK">
+      <node ref="U1" pin="24" pinfunction="PA14" pintype="bidirectional"/>
+      <node ref="U2" pin="6" pinfunction="SWCLK" pintype="bidirectional"/>
     </net>
-    <net code="5" name="Net-(J1-Pad3)">
-      <node ref="J1" pin="3"/>
-      <node ref="R3" pin="2"/>
+    <net code="5" name="/SWDIO">
+      <node ref="U1" pin="23" pinfunction="PA13" pintype="bidirectional"/>
+      <node ref="U2" pin="4" pinfunction="SWDIO" pintype="bidirectional"/>
     </net>
-    <net code="6" name="/TX">
-      <node ref="U1" pin="8"/>
-      <node ref="U2" pin="14"/>
-      <node ref="R3" pin="1"/>
+    <net code="6" name="/SWO">
+      <node ref="U1" pin="26" pinfunction="PB3" pintype="bidirectional"/>
+      <node ref="U2" pin="8" pinfunction="SWO" pintype="bidirectional"/>
     </net>
-    <net code="7" name="/RX">
-      <node ref="U2" pin="13"/>
-      <node ref="R4" pin="1"/>
-      <node ref="U1" pin="9"/>
+    <net code="7" name="/TX">
+      <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="U1" pin="8" pinfunction="PA2" pintype="bidirectional"/>
+      <node ref="U2" pin="14" pinfunction="VCP_TX" pintype="bidirectional"/>
     </net>
-    <net code="8" name="Net-(J1-Pad2)">
-      <node ref="R4" pin="2"/>
-      <node ref="J1" pin="2"/>
+    <net code="8" name="/oscillator">
+      <node ref="TP2" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="2" pinfunction="PC14" pintype="bidirectional"/>
+      <node ref="U3" pin="4" pinfunction="OUT" pintype="output"/>
     </net>
-    <net code="9" name="Net-(J3-Pad1)">
-      <node ref="J3" pin="1"/>
+    <net code="9" name="/sensor_pwr">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="IC1" pin="2" pinfunction="VDD" pintype="power_in"/>
+      <node ref="U1" pin="10" pinfunction="PA4" pintype="bidirectional"/>
     </net>
-    <net code="10" name="Net-(J3-Pad3)">
-      <node ref="J3" pin="3"/>
+    <net code="10" name="/tsl237_freq">
+      <node ref="IC1" pin="3" pinfunction="OUT" pintype="bidirectional"/>
+      <node ref="TP6" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="6" pinfunction="PA0" pintype="bidirectional"/>
     </net>
-    <net code="11" name="Net-(J3-Pad2)">
-      <node ref="JP2" pin="3"/>
-      <node ref="J3" pin="2"/>
+    <net code="11" name="GND">
+      <node ref="BT1" pin="2" pinfunction="-" pintype="passive"/>
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="IC1" pin="1" pinfunction="GND" pintype="power_in"/>
+      <node ref="J1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J3" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="U1" pin="16" pinfunction="VSS" pintype="power_in"/>
+      <node ref="U1" pin="31" pinfunction="PH3" pintype="bidirectional"/>
+      <node ref="U1" pin="32" pinfunction="VSS" pintype="power_in"/>
+      <node ref="U1" pin="33" pinfunction="VSS" pintype="power_in"/>
+      <node ref="U2" pin="11" pinfunction="GNDDetect" pintype="power_in"/>
+      <node ref="U2" pin="5" pinfunction="GND" pintype="power_out"/>
+      <node ref="U2" pin="7" pinfunction="GND" pintype="power_out"/>
+      <node ref="U3" pin="5" pinfunction="GND" pintype="power_in"/>
+      <node ref="U3" pin="7" pinfunction="GND" pintype="power_in"/>
+      <node ref="U3" pin="8" pinfunction="GND" pintype="power_in"/>
+      <node ref="U3" pin="9" pinfunction="GND" pintype="power_in"/>
     </net>
     <net code="12" name="Net-(BT1-Pad1)">
-      <node ref="BT1" pin="1"/>
-      <node ref="JP2" pin="1"/>
+      <node ref="BT1" pin="1" pinfunction="+" pintype="passive"/>
+      <node ref="JP2" pin="1" pinfunction="A" pintype="passive"/>
     </net>
-    <net code="13" name="Net-(U2-Pad2)">
-      <node ref="U2" pin="2"/>
+    <net code="13" name="Net-(J1-Pad2)">
+      <node ref="J1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
     </net>
-    <net code="14" name="Net-(U2-Pad9)">
-      <node ref="U2" pin="9"/>
+    <net code="14" name="Net-(J1-Pad3)">
+      <node ref="J1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="R3" pin="2" pintype="passive"/>
     </net>
-    <net code="15" name="Net-(U1-Pad28)">
-      <node ref="U1" pin="28"/>
+    <net code="15" name="Net-(J3-Pad2)">
+      <node ref="J3" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="JP2" pin="3" pinfunction="B" pintype="passive"/>
     </net>
-    <net code="16" name="Net-(U1-Pad25)">
-      <node ref="U1" pin="25"/>
+    <net code="16" name="VDD">
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="JP2" pin="2" pinfunction="C" pintype="input"/>
+      <node ref="U1" pin="1" pinfunction="VDD" pintype="power_in"/>
+      <node ref="U1" pin="17" pinfunction="VDD" pintype="power_in"/>
+      <node ref="U1" pin="5" pinfunction="VDDA" pintype="power_in"/>
+      <node ref="U2" pin="3" pinfunction="T_VCC" pintype="bidirectional"/>
+      <node ref="U3" pin="1" pinfunction="OE" pintype="input"/>
+      <node ref="U3" pin="2" pinfunction="VCC" pintype="power_in"/>
+      <node ref="U3" pin="3" pinfunction="VCC" pintype="power_in"/>
     </net>
-    <net code="17" name="Net-(U1-Pad22)">
-      <node ref="U1" pin="22"/>
+    <net code="17" name="unconnected-(J3-Pad1)">
+      <node ref="J3" pin="1" pinfunction="Pin_1" pintype="passive+no_connect"/>
     </net>
-    <net code="18" name="Net-(U1-Pad21)">
-      <node ref="U1" pin="21"/>
+    <net code="18" name="unconnected-(J3-Pad3)">
+      <node ref="J3" pin="3" pinfunction="Pin_3" pintype="passive+no_connect"/>
     </net>
-    <net code="19" name="Net-(U1-Pad20)">
-      <node ref="U1" pin="20"/>
+    <net code="19" name="unconnected-(U1-Pad3)">
+      <node ref="U1" pin="3" pinfunction="PC15" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="20" name="Net-(U1-Pad19)">
-      <node ref="U1" pin="19"/>
+    <net code="20" name="unconnected-(U1-Pad7)">
+      <node ref="U1" pin="7" pinfunction="PA1" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="21" name="Net-(U1-Pad13)">
-      <node ref="U1" pin="13"/>
+    <net code="21" name="unconnected-(U1-Pad11)">
+      <node ref="U1" pin="11" pinfunction="PA5" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="22" name="Net-(U1-Pad12)">
-      <node ref="U1" pin="12"/>
+    <net code="22" name="unconnected-(U1-Pad12)">
+      <node ref="U1" pin="12" pinfunction="PA6" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="23" name="Net-(U1-Pad11)">
-      <node ref="U1" pin="11"/>
+    <net code="23" name="unconnected-(U1-Pad13)">
+      <node ref="U1" pin="13" pinfunction="PA7" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="24" name="Net-(U1-Pad7)">
-      <node ref="U1" pin="7"/>
+    <net code="24" name="unconnected-(U1-Pad14)">
+      <node ref="U1" pin="14" pinfunction="PB0" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="25" name="Net-(U1-Pad3)">
-      <node ref="U1" pin="3"/>
+    <net code="25" name="unconnected-(U1-Pad15)">
+      <node ref="U1" pin="15" pinfunction="PB1" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="26" name="Net-(U1-Pad14)">
-      <node ref="U1" pin="14"/>
+    <net code="26" name="unconnected-(U1-Pad19)">
+      <node ref="U1" pin="19" pinfunction="PA9" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="27" name="Net-(U1-Pad15)">
-      <node ref="U1" pin="15"/>
+    <net code="27" name="unconnected-(U1-Pad20)">
+      <node ref="U1" pin="20" pinfunction="PA10" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="29" name="Net-(U1-Pad27)">
-      <node ref="U1" pin="27"/>
+    <net code="28" name="unconnected-(U1-Pad21)">
+      <node ref="U1" pin="21" pinfunction="PA11" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="30" name="Net-(U1-Pad29)">
-      <node ref="U1" pin="29"/>
+    <net code="29" name="unconnected-(U1-Pad22)">
+      <node ref="U1" pin="22" pinfunction="PA12" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="31" name="Net-(U1-Pad30)">
-      <node ref="U1" pin="30"/>
+    <net code="30" name="unconnected-(U1-Pad25)">
+      <node ref="U1" pin="25" pinfunction="PA15" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="32" name="Net-(U2-Pad10)">
-      <node ref="U2" pin="10"/>
+    <net code="31" name="unconnected-(U1-Pad27)">
+      <node ref="U1" pin="27" pinfunction="PB4" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="33" name="Net-(U2-Pad1)">
-      <node ref="U2" pin="1"/>
+    <net code="32" name="unconnected-(U1-Pad28)">
+      <node ref="U1" pin="28" pinfunction="PB5" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="34" name="/SWDIO">
-      <node ref="U1" pin="23"/>
-      <node ref="U2" pin="4"/>
+    <net code="33" name="unconnected-(U1-Pad29)">
+      <node ref="U1" pin="29" pinfunction="PB6" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="35" name="/SWDCLK">
-      <node ref="U1" pin="24"/>
-      <node ref="U2" pin="6"/>
+    <net code="34" name="unconnected-(U1-Pad30)">
+      <node ref="U1" pin="30" pinfunction="PB7" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="36" name="/CLKOUT">
-      <node ref="TP1" pin="1"/>
-      <node ref="U1" pin="18"/>
+    <net code="35" name="unconnected-(U2-Pad1)">
+      <node ref="U2" pin="1" pinfunction="Reserved" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="37" name="/SWO">
-      <node ref="U2" pin="8"/>
-      <node ref="U1" pin="26"/>
+    <net code="36" name="unconnected-(U2-Pad2)">
+      <node ref="U2" pin="2" pinfunction="Reserved" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="38" name="/oscillator">
-      <node ref="U1" pin="2"/>
-      <node ref="TP2" pin="1"/>
-      <node ref="U3" pin="4"/>
+    <net code="37" name="unconnected-(U2-Pad9)">
+      <node ref="U2" pin="9" pinfunction="JRCLK" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="39" name="Net-(U3-Pad6)">
-      <node ref="U3" pin="6"/>
+    <net code="38" name="unconnected-(U2-Pad10)">
+      <node ref="U2" pin="10" pinfunction="JTDI" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="40" name="/NRST">
-      <node ref="U1" pin="4"/>
-      <node ref="U2" pin="12"/>
+    <net code="39" name="unconnected-(U3-Pad6)">
+      <node ref="U3" pin="6" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="41" name="Net-(U3-Pad10)">
-      <node ref="U3" pin="10"/>
+    <net code="40" name="unconnected-(U3-Pad10)">
+      <node ref="U3" pin="10" pinfunction="NC" pintype="no_connect"/>
     </net>
   </nets>
 </export>

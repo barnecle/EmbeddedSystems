@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "Light_Sensor_schematic-rescue")(type "Legacy")(uri "${KIPRJMOD}/Light_Sensor_schematic-rescue.lib")(options "")(descr ""))
+)
